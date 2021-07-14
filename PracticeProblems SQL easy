@@ -1,0 +1,91 @@
+# 175. Combine Two Tables
+
+SELECT Person.FirstName, Person.LastName, Address.City, Address.State
+FROM Person
+LEFT JOIN Address ON Person.PersonID = Address.PersonID;
+
+
+
+# 176. Second Highest Salary
+
+SELECT
+(SELECT DISTINCT Salary 
+    FROM Employee
+    ORDER BY Salary DESC
+    LIMIT 1 OFFSET 1) as SecondHighestSalary;
+    
+    
+    
+# 181. Employees Earning More Than Their Managers
+
+SELECT a.Name as Employee
+FROM Employee as a JOIN Employee as b
+ON a.ManagerID = b.Id
+WHERE a.Salary > b.Salary;
+
+
+
+# 182. Duplicate Emails
+
+SELECT Email 
+from Person
+GROUP BY Email
+having COUNT(Email) >1
+
+
+
+# 183. Customers Who Never Order
+
+SELECT Name as Customers 
+from Customers 
+LEFT JOIN Orders on Customers.Id = Orders.CustomerId
+WHERE Orders.Id IS NULL;
+
+
+
+# 197. Rising Temperature
+
+SELECT Weather.id 
+from Weather
+INNER JOIN Weather w on DATEDIFF(Weather.recordDate, w.recordDate) = 1
+WHERE Weather.temperature > w.temperature
+
+
+
+# 595. Big Countries
+
+SELECT name, population, area 
+FROM World
+Where (area > 3000000) OR (population > 25000000)
+
+
+
+# 596. Classes More Than 5 Students
+
+SELECT class 
+FROM courses
+GROUP BY class 
+HAVING COUNT(DISTINCT student) >= 5;
+
+
+
+# 620. Not Boring Movies
+
+SELECT *
+FROM cinema
+WHERE (id % 2 = 1) AND (description != 'boring')
+ORDER BY rating DESC
+
+
+
+# 627. Swap Salary
+
+UPDATE salary
+SET sex = CASE sex
+WHEN 'm' THEN 'f'
+WHEN 'f' THEN 'm'
+END;
+
+
+
+
